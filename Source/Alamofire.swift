@@ -27,7 +27,7 @@ import Foundation
 // MARK: - URLStringConvertible
 
 /**
-    Types adopting（采取） the `URLStringConvertible（可改变的）` protocol can be used to construct（构造） URL strings, which are then used to
+    Types adopting（采取）the `URLStringConvertible（可改变的）` protocol can be used to construct（构造） URL strings, which are then used to
     construct URL requests.
 */
 public protocol URLStringConvertible {
