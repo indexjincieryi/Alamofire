@@ -27,7 +27,7 @@ import Foundation
 // MARK: - URLStringConvertible
 
 /**
-    Types adopting the `URLStringConvertible` protocol can be used to construct URL strings, which are then used to 
+    Types adopting（采取） the `URLStringConvertible（可改变的）` protocol can be used to construct（构造） URL strings, which are then used to
     construct URL requests.
 */
 public protocol URLStringConvertible {
@@ -40,10 +40,11 @@ public protocol URLStringConvertible {
         See https://tools.ietf.org/html/rfc1738
         See https://tools.ietf.org/html/rfc1808
     */
-    var URLString: String { get }
+    var URLString: String { get }///暴露 get方法 接口
 }
 
-extension String: URLStringConvertible {
+extension String: URLStringConvertible {///类似 OC中的 runtime 的功能
+        /// 实现协议URLString 的 get 方法，下面类似
     public var URLString: String {
         return self
     }
@@ -79,19 +80,20 @@ public protocol URLRequestConvertible {
 
 extension NSURLRequest: URLRequestConvertible {
     public var URLRequest: NSMutableURLRequest {
-        return self.mutableCopy() as! NSMutableURLRequest
+        return self.mutableCopy() as! NSMutableURLRequest///NSMutableURLRequest 子类，且一定不为空，这里顺便标记一下？的用法1.声明Optional值变量 2.用在对Optional值操作中，用来判断是否能响应后面的操作 3.用于安全调用protocol的optional方法 4.使用 as? 向下转型(Downcast)
     }
 }
 
-// MARK: - Convenience
+// MARK: - Convenience（便利，对外 API）
 
 func URLRequest(
     method: Method,
-    _ URLString: URLStringConvertible,
-    headers: [String: String]? = nil)
+    _ URLString: URLStringConvertible,///"_"忽略方法的默认外部参数名
+    headers: [String: String]? = nil)///swift中变量没有默认值，需要初始化或者加？（表明 optional 可能有值可能没值）这样才不会报错
     -> NSMutableURLRequest
 {
     let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: URLString.URLString)!)
+    
     mutableURLRequest.HTTPMethod = method.rawValue
 
     if let headers = headers {
@@ -120,9 +122,9 @@ func URLRequest(
 public func request(
     method: Method,
     _ URLString: URLStringConvertible,
-    parameters: [String: AnyObject]? = nil,
-    encoding: ParameterEncoding = .URL,
-    headers: [String: String]? = nil)
+    parameters: [String: AnyObject]? = nil,///默认为nil
+    encoding: ParameterEncoding = .URL,///默认为URL
+    headers: [String: String]? = nil)///默认为nil
     -> Request
 {
     return Manager.sharedInstance.request(

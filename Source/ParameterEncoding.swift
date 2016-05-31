@@ -29,7 +29,7 @@ import Foundation
 
     See https://tools.ietf.org/html/rfc7231#section-4.3
 */
-public enum Method: String {
+public enum Method: String {///枚举
     case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
 }
 
