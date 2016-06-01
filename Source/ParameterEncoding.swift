@@ -84,7 +84,7 @@ public enum ParameterEncoding {
     {
         var mutableURLRequest = URLRequest.URLRequest
 
-        guard let parameters = parameters else { return (mutableURLRequest, nil) }
+        guard let parameters = parameters else { return (mutableURLRequest, nil) }///parameters = parameters 不相等的时候返回，guard 的用法，不满足条件执行 else
 
         var encodingError: NSError? = nil
 
