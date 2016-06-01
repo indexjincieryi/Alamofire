@@ -140,7 +140,7 @@ public enum ParameterEncoding {
                 )
             }
         case .JSON:
-            do {
+            do {///do-try-catch错误处理模式
                 let options = NSJSONWritingOptions()
                 let data = try NSJSONSerialization.dataWithJSONObject(parameters, options: options)
 
