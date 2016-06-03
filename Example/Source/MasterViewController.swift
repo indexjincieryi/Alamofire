@@ -25,7 +25,8 @@
 import Alamofire
 import UIKit
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UITableViewController
+{
 
     @IBOutlet weak var titleImageView: UIImageView!
 
@@ -34,16 +35,19 @@ class MasterViewController: UITableViewController {
 
     // MARK: - View Lifecycle
 
-    override func awakeFromNib() {
+    override func awakeFromNib()
+    {
         super.awakeFromNib()
-
+        
         navigationItem.titleView = titleImageView
     }
-
-    override func viewDidLoad() {
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-
-        if let split = splitViewController {
+        
+        if let split = splitViewController
+        {
             let controllers = split.viewControllers
 
             if let
@@ -57,13 +61,16 @@ class MasterViewController: UITableViewController {
 
     // MARK: - UIStoryboardSegue
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if let///保证navigationController detailViewController这两个一定非 nil
             navigationController = segue.destinationViewController as? UINavigationController,
             detailViewController = navigationController.topViewController as? DetailViewController
         {
-            func requestForSegue(segue: UIStoryboardSegue) -> Request? {
-                switch segue.identifier! {
+            func requestForSegue(segue: UIStoryboardSegue) -> Request?
+            {
+                switch segue.identifier!
+                {
                 case "GET":
                     detailViewController.segueIdentifier = "GET"
                     return Alamofire.request(.GET, "https://httpbin.org/get")
@@ -88,7 +95,8 @@ class MasterViewController: UITableViewController {
                 }
             }
 
-            if let request = requestForSegue(segue) {
+            if let request = requestForSegue(segue)
+            {
                 detailViewController.request = request
             }
         }

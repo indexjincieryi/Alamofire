@@ -192,7 +192,8 @@ public class Request {
     /**
         Cancels the request.
     */
-    public func cancel() {
+    public func cancel()
+    {
         if let
             downloadDelegate = delegate as? DownloadTaskDelegate,
             downloadTask = downloadDelegate.downloadTask
@@ -200,7 +201,9 @@ public class Request {
             downloadTask.cancelByProducingResumeData { data in
                 downloadDelegate.resumeData = data
             }
-        } else {
+        }
+        else
+        {
             task.cancel()
         }
 
@@ -455,24 +458,29 @@ public class Request {
 
 // MARK: - CustomStringConvertible
 
-extension Request: CustomStringConvertible {
+extension Request: CustomStringConvertible
+{
 
     /**
         The textual representation used when written to an output stream, which includes the HTTP method and URL, as 
         well as the response status code if a response has been received.
     */
-    public var description: String {
+    public var description: String
+    {
         var components: [String] = []
 
-        if let HTTPMethod = request?.HTTPMethod {
+        if let HTTPMethod = request?.HTTPMethod
+        {
             components.append(HTTPMethod)
         }
 
-        if let URLString = request?.URL?.absoluteString {
+        if let URLString = request?.URL?.absoluteString
+        {
             components.append(URLString)
         }
 
-        if let response = response {
+        if let response = response
+        {
             components.append("(\(response.statusCode))")
         }
 

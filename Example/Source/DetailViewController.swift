@@ -25,13 +25,17 @@
 import Alamofire
 import UIKit
 
-class DetailViewController: UITableViewController {
-    enum Sections: Int {
+class DetailViewController: UITableViewController
+{
+    enum Sections: Int///枚举 0、1
+    {
         case Headers, Body
     }
 
-    var request: Alamofire.Request? {
-        didSet {
+    var request: Alamofire.Request?
+    {
+        didSet///Swift语言中用了willSet和didSet这两个特性来监视属性值变化(初始化除外)
+        {
             oldValue?.cancel()
 
             title = request?.description
@@ -55,19 +59,24 @@ class DetailViewController: UITableViewController {
 
     // MARK: View Lifecycle
 
-    override func awakeFromNib() {
+    override func awakeFromNib()
+    {
         super.awakeFromNib()
+        
         refreshControl?.addTarget(self, action: #selector(DetailViewController.refresh), forControlEvents: .ValueChanged)
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool)
+    {
         super.viewDidAppear(animated)
+        
         refresh()
     }
 
     // MARK: IBActions
 
-    @IBAction func refresh() {
+    @IBAction func refresh()
+    {
         guard let request = request else {
             return
         }

@@ -40,11 +40,10 @@ public protocol URLStringConvertible {
         See https://tools.ietf.org/html/rfc1738
         See https://tools.ietf.org/html/rfc1808
     */
-    var URLString: String { get }///暴露 get方法 接口
+    var URLString: String { get }///只读，不能进行 set
 }
 
 extension String: URLStringConvertible {///类似 OC中的 runtime 的功能
-        /// 实现协议URLString 的 get 方法，下面类似
     public var URLString: String {
         return self
     }
